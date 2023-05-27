@@ -12,8 +12,17 @@ code {
     monospace;
 }
 
+h3{
+  padding-top:1rem;
+  padding-bottom:1rem;
+}
+
 footer{
   position:fixed;
   bottom:0;
   width:100vw;
+}
+
+i{
+  color: var(--bs-primary);
 }
