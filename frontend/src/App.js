@@ -17,7 +17,7 @@ function App() {
           <Switch>
           
           <Route path="/product/:id" component={withRouter(ProductScreen)} />
-          <Route path="/" component={withRouter(HomeScreen)} exact />
+          <Route path="/" component={withRouter(HomeScreen)} exact index={true} />
           </Switch>
         </Container>
         </main>
