@@ -6,6 +6,7 @@ import {Container, Navbar, NavDropdown, Nav, Badge } from 'react-bootstrap'
 
 export default function Header(){
   const { cartItems } = useSelector((state) => state.cart)
+  const itemsCount = parseInt(cartItems.reduce((acc, item) => acc + item.qty, 0))
     return (
         <header>
             <Navbar bg="dark" variant = "dark" expand="lg" collapseOnSelect="true"  className = "py-3">
@@ -19,7 +20,7 @@ export default function Header(){
               {
                 cartItems.length > 0 && (
                   <Badge pill bg='success' className="ml-2">
-                    { cartItems.reduce((a, c) => a + c.qty, 0) }
+                    { itemsCount }
                   </Badge>
                 ) 
               }</i></Link></Nav.Link>

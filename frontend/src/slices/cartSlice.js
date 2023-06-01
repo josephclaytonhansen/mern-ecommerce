@@ -16,15 +16,21 @@ function addToCartHelper(state, action){
     
 }
 
+function removeFromCartHelper(state, action){
+    state.cartItems = state.cartItems.filter((x)=> x._id !== action.payload)
+    return updateCart(state)
+}
+
 
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addToCart: (state, action) => addToCartHelper(state, action)
+        addToCart: (state, action) => addToCartHelper(state, action),
+        removeFromCart: (state, action) => removeFromCartHelper(state, action),
     }
 })
 
 export default cartSlice.reducer
-export const { addToCart } = cartSlice.actions
+export const { addToCart, removeFromCart } = cartSlice.actions
