@@ -1,7 +1,7 @@
 import React from "react"
 import { Card } from 'react-bootstrap'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
-import Rating from '../components/Rating'
+import Rating from './Rating'
 import {withRouter} from 'react-router'
 
 
