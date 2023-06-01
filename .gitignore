@@ -160,4 +160,7 @@ sketch
 
 frontend/node_modules/.cache
 
+/frontend/node_modules
+/frontend/node_modules/
+
 # End of https://www.toptal.com/developers/gitignore/api/react,node
