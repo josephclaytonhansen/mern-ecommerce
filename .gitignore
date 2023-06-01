@@ -150,7 +150,7 @@ dist
 
 node_modules
 
-.frontend/node_modules
+frontend/node_modules
 
 *.sublime*
 
@@ -158,6 +158,6 @@ psd
 thumb
 sketch
 
-.frontend/node_modules/.cache
+frontend/node_modules/.cache
 
 # End of https://www.toptal.com/developers/gitignore/api/react,node
