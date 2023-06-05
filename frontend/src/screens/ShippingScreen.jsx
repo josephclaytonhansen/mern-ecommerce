@@ -29,7 +29,7 @@ const ShippingScreen = () => {
 
     return (
         <FormContainer>
-            <CheckoutSteps step1 step2></CheckoutSteps>
+            <CheckoutSteps s={2}></CheckoutSteps>
             <h1>Shipping</h1>
             <Form onSubmit={submitHandler}>
                 

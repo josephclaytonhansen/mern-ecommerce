@@ -41,6 +41,11 @@ export function saveShippingAddressHelper(state, action){
     return updateCart(state)
 }
 
+export function savePaymentMethodHelper(state, action){
+    state.paymentMethod = action.payload
+    return updateCart(state)
+}
+
 export const updateCart = (state) => {
     state.totalPrice = addDecimals(itemsPrice(state) + shippingPrice(state) + taxPrice(state))
     localStorage.setItem('cart', JSON.stringify(state))
