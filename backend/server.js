@@ -1,6 +1,7 @@
 import express from 'express'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import orderRoutes from './routes/orderRoutes.js'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 dotenv.config()
@@ -34,6 +35,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRoutes)
 app.use("/api/users", userRoutes)
+app.use("/api/users", orderRoutes)
 app.use(notFound)
 
 app.listen(port, () => {console.log(`Server running on port ${port}`)})
