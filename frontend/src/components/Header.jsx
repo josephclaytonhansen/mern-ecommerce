@@ -1,12 +1,32 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import {Link, useHistory} from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
+
+import { useLogoutMutation } from '../slices/usersApiSlice'
+import {logout } from '../slices/authSlice'
 
 import {Container, Navbar, NavDropdown, Nav, Badge} from 'react-bootstrap'
 
 export default function Header() {
   const {cartItems} = useSelector((state) => state.cart)
   const {userInfo} = useSelector((state) => state.auth)
+
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const [logoutApiCall] = useLogoutMutation()
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap()
+      dispatch(logout())
+      history.push('/login')
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+  }
 
   const itemsCount = parseInt(cartItems.reduce((acc, item) => acc + item.qty, 0))
   return (
@@ -48,16 +68,13 @@ export default function Header() {
               </Nav.Link>
 
               {userInfo ? (
-                                             <Nav.Link>
-                                             <Link
-                                               to="/profile"
-                                               className="link-light"
-                                               style={{
-                                               textDecoration: 'none'
-                                             }}>
-                                               <i className='fas fa-user text-secondary'></i>
-                                                <span className = "mx-1">Profile</span></Link>
-                                           </Nav.Link>
+                                             <>
+                                                <NavDropdown title = {userInfo.name} id='username'>
+                                                    <NavDropdown.Item> <Link to='/profile' className='link-dark'>Profile</Link></NavDropdown.Item>
+                                                    <NavDropdown.Item onClick={logoutHandler}>Log Out</NavDropdown.Item>
+                                                </NavDropdown>
+                                             </>
+                                           
               ) : (
                               <Nav.Link>
                               <Link
