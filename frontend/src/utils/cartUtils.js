@@ -18,6 +18,28 @@ export function taxPrice(state){
     return state.taxPrice
 }
 
+export function addToCartHelper(state, action){
+    const item = action.payload
+    const inCart = state.cartItems.find((p) => p._id === item._id)
+
+    if (inCart) {
+        state.cartItems = state.cartItems.map((p) => p._id === inCart._id ? item : p)
+    } else {
+        state.cartItems = [...state.cartItems, item]
+    }
+    return updateCart(state)
+    
+}
+
+export function removeFromCartHelper(state, action){
+    state.cartItems = state.cartItems.filter((x)=> x._id !== action.payload)
+    return updateCart(state)
+}
+
+export function saveShippingAddressHelper(state, action){
+    state.shippingAddress = action.payload
+    return updateCart(state)
+}
 
 export const updateCart = (state) => {
     state.totalPrice = addDecimals(itemsPrice(state) + shippingPrice(state) + taxPrice(state))

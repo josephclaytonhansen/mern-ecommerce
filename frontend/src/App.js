@@ -12,8 +12,12 @@ import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
+import RegisterScreen from './screens/RegisterScreen'
+import ShippingScreen from './screens/ShippingScreen'
+import { useSelector } from 'react-redux'
 
 function App() {
+  const {userInfo} = useSelector((state) => state.auth)
   return (
     <Router>
     <Header />
@@ -25,6 +29,8 @@ function App() {
           <Route path="/cart" component={withRouter(CartScreen)} />
           <Route path="/" component={withRouter(HomeScreen)} exact index={true} />
           <Route path="/login" component={(LoginScreen)} />
+          <Route path="/register" component={(RegisterScreen)} />
+          {userInfo ? <Route path="/shipping" component={(ShippingScreen)} /> : <Route path="/shipping" component={(LoginScreen)} />}
           </Switch>
         </Container>
         </main>
