@@ -53,7 +53,7 @@ const PaymentScreen = () => {
                         className='margin-y2'
                          label='Stripe'
                           id='Stripe' name='paymentMethod'
-                           value='Stripe' checked
+                           value='Stripe'
                             onChange={(e) => setPaymentMethod(e.target.value)}>
 
                             </Form.Check>

@@ -29,7 +29,7 @@ const CheckoutSteps = ({s}) => {
                 )}
             </Nav.Item>
         </Nav>
-        <ProgressBar now={s<2 ? 0 : s<3 ? 33 : s<4 ? 66 : 100} variant='success' className='mt-3 mb-5'></ProgressBar>
+        <ProgressBar now={s<2 ? 0 : s<3 ? 25 : s<4 ? 55 : 95} variant='success' className='mt-3 mb-5'></ProgressBar>
         </Container>
     )
 }

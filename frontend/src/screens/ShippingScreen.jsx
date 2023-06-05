@@ -54,7 +54,7 @@ const ShippingScreen = () => {
                     <Col md = {4}>
                         <Form.Group controlId='postalcode' className='my-3'>
                             <Form.Label>Postal code</Form.Label>
-                            <Form.Control type = 'text' required='true' placeholder='Enter postal code' value ={postalCode} onChange={(e)=>setPostalCode(e.target.value)}></Form.Control>
+                            <Form.Control type = 'number' required='true' placeholder='Enter postal code' value ={postalCode} onChange={(e)=>setPostalCode(e.target.value)}></Form.Control>
                         </Form.Group>
                     </Col>
                     <Col md = {4}>
