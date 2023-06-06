@@ -29,9 +29,16 @@ const orderSchema = new mongoose.Schema({
     shippingPrice:{type: Number, required: true, default:0.0},
     totalPrice:{type: Number, required: true, default:0.0},
     isPaid:{type: Boolean, required: true, default:false},
-    paidAt:{type: Date},
+    isShipped:{type: Boolean, required: true, default:false},
+    trackingNumber:{type: String, required: false, default:''},
+    responsibleUser:{type: mongoose.Schema.Types.ObjectId, required: false, ref: "User"},
+    paidAt:{type: Date,},
     isDelivered:{type: Boolean, required: true, default:false},
     deliveredAt:{type: Date},
+    isReviewed:{type: Boolean, required: false, default:false},
+    reviewRating:{type: Number, required: false, default:0},
+    reviewComment:{type: String, required: false, default:''},
+    reviewImage:{type: String, required: false, default:''},
 
 }, {timestamps: true})
 

@@ -16,6 +16,7 @@ import RegisterScreen from './screens/RegisterScreen'
 import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
+import OrderScreen from './screens/OrderScreen'
 import { useSelector } from 'react-redux'
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
           <Route path="/register" component={(RegisterScreen)} />
           {userInfo ? <Route path="/shipping" component={(ShippingScreen)} /> : <Route path="/shipping" component={(LoginScreen)} />}
           {userInfo ? <Route path="/payment" component={(PaymentScreen)} /> : <Route path="/payment" component={(LoginScreen)} />}
-          {userInfo ? <Route path="/placeorder" component={(PlaceOrderScreen)} /> : <Route path="/payment" component={(LoginScreen)} />}
+          {userInfo ? <Route path="/placeorder" component={(PlaceOrderScreen)} /> : <Route path="/placeorder" component={(LoginScreen)} />}
+          {userInfo ? <Route path="/order/:id" component={(OrderScreen)} /> : <Route path="/order/:id" component={(LoginScreen)} />}
 
           </Switch>
         </Container>
