@@ -36,8 +36,9 @@ const PlaceOrderScreen = (props) => {
                 shippingPrice: cart.shippingPrice,
                 totalPrice: cart.totalPrice
             }).unwrap()
-            dispatch(clearCart())
             history.push(`/order/${res._id}`)
+            console.log(`/order/${res._id}`)
+            dispatch(clearCart())
         } catch (error) {
             toast.error(error.message, {toastId: 'placeOrderError', draggable: false, autoClose: 1500})
             
@@ -52,7 +53,7 @@ const PlaceOrderScreen = (props) => {
 
     return(
         <Container>
-        {cart.cartItems.length === 0 ? (
+        {cart.cartItems.length === 0 && !cart.shippingAddress ? (
             <>
         <Message>Your cart is empty</Message>
         <Container>
