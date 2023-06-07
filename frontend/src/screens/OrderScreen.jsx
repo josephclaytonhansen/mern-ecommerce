@@ -129,7 +129,7 @@ const OrderScreen = () => {
                 <ListGroup variant='flush'>
                     <ListGroup.Item>
                     <ProgressBar variant = {order.isDelivered ? 'success' : 'primary'} className='progress-bar-striped progress-bar-animated'
-                    now={order.isPaid ? 50 : order.isShipped ? 75 : order.isDelivered ? 100 : 25}></ProgressBar>
+                    now={order.isPaid && !order.isShipped && !order.isDelivered ? 50 : order.isShipped && order.isPaid && !order.isDelivered ? 75 : order.isDelivered ? 100 : 25}></ProgressBar>
                     <Row className = "my-2 justify-content-between align-items-between align-content-between">
                         <Col className='text-center'>
                         {order ? <strong>Ordered</strong> : `Ordered`}
