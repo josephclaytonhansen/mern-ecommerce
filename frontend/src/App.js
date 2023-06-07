@@ -18,10 +18,12 @@ import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
 import { useSelector } from 'react-redux'
+import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 function App() {
   const {userInfo} = useSelector((state) => state.auth)
   return (
+    <PayPalScriptProvider deferLoading={true}>
     <Router>
     <Header />
       <main>
@@ -45,6 +47,7 @@ function App() {
         <ToastContainer />
 
     </Router>
+    </PayPalScriptProvider>
   );
 }
 
