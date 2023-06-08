@@ -8,6 +8,8 @@ import Loader from "../components/Loader"
 import { toast } from "react-toastify"
 import PasswordStrengthBar from 'react-password-strength-bar'
 import { setCredentials } from "../slices/authSlice"
+import { useGetMyOrdersQuery } from '../slices/ordersApi'
+import {FaTimes, FaCheck} from 'react-icons/fa'
 
 const ProfileScreen = () => {
     const [name, setName] = useState("")
@@ -16,10 +18,13 @@ const ProfileScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const { userInfo } = useSelector(state => state.auth)
 
     const [updateProfile, {isLoading: loadingUpdateProfile}] = useProfileMutation()
+
+    const {data: orders, isLoading: loadingOrders, error: errorOrders} = useGetMyOrdersQuery()
 
     useEffect(() => {
         if(userInfo){
@@ -60,19 +65,48 @@ const ProfileScreen = () => {
                         </Form.Group>
                         <Form.Group controlId="password" className="my-2">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
+                            <Form.Control type="password" placeholder="Enter new password" value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
                         </Form.Group>
                         <PasswordStrengthBar password={password} minLength={8}/>
                         <Form.Group controlId="confirmPassword" className="my-2">
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter password" value={''} onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
+                            <Form.Control type="password" placeholder="Confirm new password" value={''} onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
                         </Form.Group>
                         <Button type="submit" variant="primary" className="my-3 w-100">Update</Button>
                         {loadingUpdateProfile && <Loader/>}
                     </Form>
 
                 </Col>
-                <Col md={9}></Col>
+                <Col md={9}>
+                    <h3>My Orders</h3>
+                    {loadingOrders ? <Loader/> : errorOrders ? <Message variant="danger">{errorOrders?.data?.message || errorOrders.error}</Message> : (
+                        <Table striped hover responsive className='align-items-center align-content-center justify-content-center table-sm text-center'>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Paid</th>
+                                    <th>Shipped</th>
+                                    <th>Delivered</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders?.map((order) => (
+                                    <tr key={order._id} onClick={()=> {history.push(`/order/${order._id}`)}} style={{cursor:'pointer'}}>
+                                        <td>{order._id && (<Link to={`/order/${order._id}`}>{parseInt(order._id.substr(18), 16)}</Link>)}</td>
+                                        <td>{order.createdAt.substring(0,10)}</td>
+                                        <td>${order.totalPrice}</td>
+                                        <td>{order.isPaid ?  <i className="fas fa-check" style={{color: "green"}}></i>: <i className="fas fa-times" style={{color: "red"}}></i>}</td>
+                                        <td>{order.isShipped ?  <i className="fas fa-check" style={{color: "green"}}></i>: <i className="fas fa-times" style={{color: "red"}}></i>}</td>
+                                        <td>{order.isDelivered ?  <i className="fas fa-check" style={{color: "green"}}></i>: <i className="fas fa-times" style={{color: "red"}}></i>}</td>
+                                        </tr>
+                                ) )}
+                            </tbody>
+                            </Table>
+                    )}
+                </Col>
             </Row>
         </Container>
     )

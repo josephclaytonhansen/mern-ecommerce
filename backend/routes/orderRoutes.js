@@ -5,6 +5,7 @@ import {addOrderItems, getMyOrders, getOrder, updateOrderToPaid, updateOrderToSh
 import { protect, admin } from '../middleware/authMiddleware.js'
 
 router.route('/').post(protect, addOrderItems).get(protect, admin, getOrders)
+router.route('/mine').get(protect, getMyOrders)
 router.route('/order-history').get(protect, getMyOrders)
 router.route('/:id').get(protect, getOrder)
 router.route('/:id/pay').put(protect, updateOrderToPaid)
