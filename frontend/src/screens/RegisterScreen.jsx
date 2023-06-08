@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Form, Button, Row, Col} from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
 import Loader from '../components/Loader'
+import PasswordStrengthBar from 'react-password-strength-bar'
 import { useRegisterMutation } from '../slices/usersApiSlice'
 import {setCredentials} from '../slices/authSlice'
 import {toast} from 'react-toastify'
@@ -88,6 +89,7 @@ const RegisterScreen = () => {
                     >
                     </Form.Control>
                 </Form.Group>
+                <PasswordStrengthBar password={password} minLength={8}/>
                 <Form.Group controlId='confirmPassword' className='my-3'>
                     <Form.Label>Confirm password</Form.Label>
                     <Form.Control

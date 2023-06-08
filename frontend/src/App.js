@@ -17,6 +17,7 @@ import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
+import ProfileScreen from './screens/ProfileScreen'
 import { useSelector } from 'react-redux'
 import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
@@ -39,6 +40,7 @@ function App() {
           {userInfo ? <Route path="/payment" component={(PaymentScreen)} /> : <Route path="/payment" component={(LoginScreen)} />}
           {userInfo ? <Route path="/placeorder" component={(PlaceOrderScreen)} /> : <Route path="/placeorder" component={(LoginScreen)} />}
           {userInfo ? <Route path="/order/:id" component={(OrderScreen)} /> : <Route path="/order/:id" component={(LoginScreen)} />}
+          {userInfo ? <Route path="/profile" component={(ProfileScreen)} /> : <Route path="/order/:id" component={(LoginScreen)} />}
 
           </Switch>
         </Container>
