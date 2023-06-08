@@ -31,10 +31,10 @@ import generateToken from '../utils/generateToken.js'
  // @access Public
  const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body
-    const userExists = await User.findOne({email: email})
+    const userExists = await User.findOne({email: {$eq: email}})
     if (userExists) {
       res.status(400)
-      throw new Error('Emial address already in use')
+      throw new Error('Email address already in use')
     } else {
       const user = await User.create({
          name,
