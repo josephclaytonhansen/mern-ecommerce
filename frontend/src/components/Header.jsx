@@ -88,6 +88,15 @@ export default function Header() {
                             </Nav.Link>
               )}
 
+              {
+                userInfo && userInfo.isAdmin && (
+                  <NavDropdown title='Admin' id='adminmenu'>
+                    <NavDropdown.Item> <Link to='/users' className='link-dark'>Users</Link></NavDropdown.Item>
+                    <NavDropdown.Item> <Link to='/orders' className='link-dark'>Orders</Link></NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
+
 
             </Nav>
           </Navbar.Collapse>

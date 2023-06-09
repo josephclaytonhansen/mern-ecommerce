@@ -18,11 +18,14 @@ import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
 import ProfileScreen from './screens/ProfileScreen'
+import AdminOrderListScreen from './screens/AdminOrderListScreen'
 import { useSelector } from 'react-redux'
 import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 function App() {
   const {userInfo} = useSelector((state) => state.auth)
+
+
   return (
     <PayPalScriptProvider deferLoading={true}>
     <Router>
@@ -41,6 +44,7 @@ function App() {
           {userInfo ? <Route path="/placeorder" component={(PlaceOrderScreen)} /> : <Route path="/placeorder" component={(LoginScreen)} />}
           {userInfo ? <Route path="/order/:id" component={(OrderScreen)} /> : <Route path="/order/:id" component={(LoginScreen)} />}
           {userInfo ? <Route path="/profile" component={(ProfileScreen)} /> : <Route path="/order/:id" component={(LoginScreen)} />}
+          {userInfo && userInfo.isAdmin ? <Route path="/orders" component={(AdminOrderListScreen)} /> : <Route path="/orders" component={(LoginScreen)} />}
 
           </Switch>
         </Container>
